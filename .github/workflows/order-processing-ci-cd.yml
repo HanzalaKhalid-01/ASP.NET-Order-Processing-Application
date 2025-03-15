@@ -1,0 +1,65 @@
+name: ASP.NET Order Processing CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and Test Application
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Setup .NET Core
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0 # Change this if you're using a different version
+
+      # Restore Dependencies
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      # Build the Application
+      - name: Build Application
+        run: dotnet build --configuration Release --no-restore
+
+      # Run Tests
+      - name: Run Unit Tests
+        run: dotnet test --no-restore --verbosity normal
+
+  deploy:
+    name: Deploy Application
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      # Checkout the code again for deployment
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Setup .NET Core
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0 # Change this if you're using a different version
+
+      # Publish the Application
+      - name: Publish Application
+        run: dotnet publish -c Release -o ./published
+
+      # Example deployment step
+      - name: Deploy to Server
+        env:
+          DEPLOYMENT_KEY: ${{ secrets.DEPLOYMENT_KEY }} # Use secrets for sensitive data
+        run: |
+          echo "Deploying application..."
+          # Replace this with your deployment script, e.g., copying to a server or Azure deployment
