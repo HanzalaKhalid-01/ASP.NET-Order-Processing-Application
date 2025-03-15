@@ -55,7 +55,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0 # Change this to the version of .NET you're using
+          dotnet-version: 8.0 # Change this to the version of .NET you're using
 
       # Publish the Application
       - name: Publish Application
