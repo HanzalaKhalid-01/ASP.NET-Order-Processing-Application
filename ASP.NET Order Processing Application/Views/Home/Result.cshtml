@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Order Results";
+}
+
+<div class="container text-center my-5">
+    <h1 class="display-4 text-primary mb-4">🎉 Order Summary 🎉</h1>
+
+    <div class="card shadow-lg p-4">
+        <div class="card-body">
+            <h2 class="card-title text-secondary">Here's what we processed:</h2>
+
+            <div class="mt-4">
+                <p class="lead">
+                    <strong>Order Amount:</strong>
+                    <span class="text-success">$@TempData["OrderAmount"]</span>
+                </p>
+                <p class="lead">
+                    <strong>Customer Type:</strong>
+                    <span class="badge bg-info text-dark">@TempData["CustomerType"]</span>
+                </p>
+                <p class="lead">
+                    <strong>Discount Applied:</strong>
+                    <span class="text-danger">$@TempData["Discount"]</span>
+                </p>
+                <p class="lead">
+                    <strong>Final Total:</strong>
+                    <span class="text-success">$@TempData["FinalAmount"]</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <a href="/" class="btn btn-primary btn-lg">Process Another Order</a>
+    </div>
+</div>

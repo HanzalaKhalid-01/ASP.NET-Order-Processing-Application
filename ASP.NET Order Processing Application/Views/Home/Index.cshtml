@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Order Processing";
+}
+
+<div class="text-center m-5">
+    <h1 class="display-4 mb-5">Enter Your Amount</h1>
+</div>
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage as string))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+<br />
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <div class="row">
+        <div class="container-fluid col-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="addon1">Order Amount $</span>
+                @Html.TextBox("orderAmount", null, new { type = "number", @class = "form-control", placeholder = "Enter Order Amount", min = "0", step = "0.01", aria_label = "orderAmount", aria_describedby = "addon1" })
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Customer Type</label>
+                @Html.DropDownList("customerType", new SelectList(new[] {
+            new { Value = "New", Text = "New Customer" },
+            new { Value = "Loyal", Text = "Loyal Customer" }
+            }, "Value", "Text"), "Select Customer Type...", new { @class = "form-select", id = "inputGroupSelect01" })
+            </div>
+            <button type="submit" class="btn btn-primary text-center">Submit</button>
+        </div>
+    </div>
+}
