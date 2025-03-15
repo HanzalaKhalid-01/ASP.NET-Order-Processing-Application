@@ -1,0 +1,70 @@
+name: CI/CD Pipeline
+
+on:
+  # Trigger the workflow on pushes to the main or any feature branch
+  push:
+    branches:
+      - main
+      - feature/*
+
+  # Trigger the workflow on pull requests targeting main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and Test Application
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Setup .NET Core
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0 # Change this to the version of .NET you're using
+
+      # Restore Dependencies
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      # Build the Application
+      - name: Build Application
+        run: dotnet build --configuration Release --no-restore
+
+      # Run Tests
+      - name: Run Unit Tests
+        run: dotnet test --no-restore --verbosity normal
+
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      # Checkout the code again for deployment
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Setup .NET Core
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0 # Change this to the version of .NET you're using
+
+      # Publish the Application
+      - name: Publish Application
+        run: dotnet publish -c Release -o ./published
+
+      # Deployment script (example step)
+      - name: Deploy to Server
+        env:
+          DEPLOYMENT_KEY: ${{ secrets.DEPLOYMENT_KEY }} # Use GitHub secrets for secure keys
+        run: |
+          echo "Deploying application to production..."
+          # Replace this with your actual deployment commands (e.g., copy to server, upload to Azure, etc.)
