@@ -27,23 +27,23 @@ jobs:
 
       # Restore Dependencies
       - name: Restore Main Project Dependencies
-        run: dotnet restore ./ASP.NET-Order-Processing-Application/ASP.NET-Order-Processing-Application.csproj
+        run: dotnet restore "ASP.NET Order Processing Application/ASP.NET Order Processing Application.csproj"
 
       # Step 4: Build the main project
       - name: Build Main Project
-        run: dotnet build ./ASP.NET-Order-Processing-Application/ASP.NET-Order-Processing-Application.csproj --no-restore
+        run: dotnet build "ASP.NET Order Processing Application/ASP.NET Order Processing Application.csproj" --no-restore
 
       # Step 5: Restore dependencies for the test project
       - name: Restore Test Project Dependencies
-        run: dotnet restore ./OrderProcessingTests/OrderProcessingTests.csproj
+        run: dotnet restore "OrderProcessingTests/OrderProcessingTests.csproj"
 
       # Step 6: Build the test project
       - name: Build Test Project
-        run: dotnet build ./OrderProcessingTests/OrderProcessingTests.csproj --no-restore
+        run: dotnet build "OrderProcessingTests/OrderProcessingTests.csproj" --no-restore
 
       # Step 7: Run tests
       - name: Run Tests
-        run: dotnet test ./OrderProcessingTests/OrderProcessingTests.csproj --no-build --verbosity normal
+        run: dotnet test "OrderProcessingTests/OrderProcessingTests.csproj" --no-build --verbosity normal
 
   deploy:
     name: Deploy Application
