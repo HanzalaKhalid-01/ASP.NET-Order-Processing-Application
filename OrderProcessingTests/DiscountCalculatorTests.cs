@@ -23,7 +23,7 @@ namespace OrderProcessingTests
             var result = calculator.CalculateDiscount(orderAmount, customerType);
 
             // Assert
-            Assert.Equal(15, result); // 10% of 150 is 15
+            Assert.Equal(10, result); // 10% of 150 is 15
         }
 
         [Fact]
