@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35806.99 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NET Order Processing Application", "ASP.NET Order Processing Application\ASP.NET Order Processing Application.csproj", "{73A20FC6-0CDF-4EF6-87AC-D07387335AD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessingTests", "OrderProcessingTests\OrderProcessingTests.csproj", "{60A4636F-3086-4E03-ACD9-6EE944073139}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{73A20FC6-0CDF-4EF6-87AC-D07387335AD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73A20FC6-0CDF-4EF6-87AC-D07387335AD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73A20FC6-0CDF-4EF6-87AC-D07387335AD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60A4636F-3086-4E03-ACD9-6EE944073139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60A4636F-3086-4E03-ACD9-6EE944073139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60A4636F-3086-4E03-ACD9-6EE944073139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60A4636F-3086-4E03-ACD9-6EE944073139}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
