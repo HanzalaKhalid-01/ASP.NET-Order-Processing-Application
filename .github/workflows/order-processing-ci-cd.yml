@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature
   pull_request:
     branches:
       - main
@@ -22,19 +23,27 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0 # Change this if you're using a different version
+          dotnet-version: 8.0 # Change this if you're using a different version
 
       # Restore Dependencies
-      - name: Restore Dependencies
-        run: dotnet restore
+      - name: Restore Main Project Dependencies
+        run: dotnet restore "ASP.NET Order Processing Application/ASP.NET Order Processing Application.csproj"
 
-      # Build the Application
-      - name: Build Application
-        run: dotnet build --configuration Release --no-restore
+      # Step 4: Build the main project
+      - name: Build Main Project
+        run: dotnet build "ASP.NET Order Processing Application/ASP.NET Order Processing Application.csproj" --no-restore
 
-      # Run Tests
-      - name: Run Unit Tests
-        run: dotnet test --no-restore --verbosity normal
+      # Step 5: Restore dependencies for the test project
+      - name: Restore Test Project Dependencies
+        run: dotnet restore "OrderProcessingTests/OrderProcessingTests.csproj"
+
+      # Step 6: Build the test project
+      - name: Build Test Project
+        run: dotnet build "OrderProcessingTests/OrderProcessingTests.csproj" --no-restore
+
+      # Step 7: Run tests
+      - name: Run Tests
+        run: dotnet test "OrderProcessingTests/OrderProcessingTests.csproj" --no-build --verbosity normal
 
   deploy:
     name: Deploy Application
