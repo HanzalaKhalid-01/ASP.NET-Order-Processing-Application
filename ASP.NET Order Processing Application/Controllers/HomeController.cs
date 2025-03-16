@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ASP.NET_Order_Processing_Application.Models;
 
 namespace ASP.NET_Order_Processing_Application.Controllers;
 
@@ -14,16 +15,13 @@ public class HomeController : Controller
     {
         if (orderAmount > 0 && !string.IsNullOrEmpty(customerType))
         {
-            decimal discount = 0;
             decimal finalAmount = orderAmount;
-
-            // Calculate discount accurately
-            if (orderAmount >= 100 && customerType.Contains("Loyal"))
+            DiscountCalculator dc  = new DiscountCalculator();
+            var discount  = dc.CalculateDiscount(orderAmount, customerType);
+            if (discount > 0)
             {
-                discount = orderAmount * 0.10M; // 10% discount
-                finalAmount = orderAmount - discount;
+                finalAmount-=discount;
             }
-
             // Pass data to the Result page through TempData 
             TempData["OrderAmount"] = orderAmount.ToString("F2");
             TempData["CustomerType"] = customerType;
